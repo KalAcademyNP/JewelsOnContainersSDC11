@@ -16,6 +16,17 @@ services:
     networks:
       - backend
 
+  tokensqlserver:
+    image: "mcr.microsoft.com/mssql/server:latest"
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: ProductApi(!)
+    ports:
+      - "1449:1433"
+    container_name: jewelstokensqlserver
+    networks:
+      - backend
+
   catalog:
     image: jewels/catalogapi
     build:
@@ -50,3 +61,20 @@ services:
       - frontend
     depends_on:
       - catalog
+
+  tokenserver:
+    build:
+      context: .\TokenServiceApi
+      dockerfile: Dockerfile
+    image: jewels/tokenapi
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      MvcClient: http://localhost:7500
+    ports:
+      - "7800:80"
+    container_name: tokenserviceapi
+    networks:
+      - backend
+      - frontend
+    depends_on:
+      - tokensqlserver

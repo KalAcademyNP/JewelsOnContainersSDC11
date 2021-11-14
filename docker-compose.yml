@@ -54,6 +54,8 @@ services:
       dockerfile: Dockerfile
     environment:
       CatalogUrl: http://catalog
+      IdentityUrl: http://192.168.1.30:7800
+      CallBackUrl: http://localhost:7500
     ports:
       - "7500:80"
     container_name: webshop
@@ -61,6 +63,7 @@ services:
       - frontend
     depends_on:
       - catalog
+      - tokenserver
 
   tokenserver:
     build:

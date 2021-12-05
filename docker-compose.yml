@@ -66,6 +66,9 @@ services:
       IdentityUrl: http://192.168.1.30:7800
       CallBackUrl: http://localhost:7500
       CartUrl: http://cart
+      OrderUrl: http://order
+      StripePublicKey: pk_test_jZlpubvlPmcV6QJPReImelQy
+      StripePrivateKey: sk_test_bSHT9qxwjpyCOP0qdAvHLfAA
     ports:
       - "7500:80"
     container_name: webshop
@@ -75,6 +78,7 @@ services:
       - catalog
       - tokenserver
       - cart
+      - order
 
   tokenserver:
     build:

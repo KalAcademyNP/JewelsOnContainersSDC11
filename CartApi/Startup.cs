@@ -76,6 +76,7 @@ namespace CartApi
                         Implicit = new OpenApiOAuthFlow
                         {
                             AuthorizationUrl = new Uri($"{Configuration.GetValue<string>("IdentityUrl")}/connect/authorize", UriKind.Absolute),
+                            TokenUrl = new Uri($"{Configuration.GetValue<string>("IdentityUrl")}/connect/token"),
                             Scopes = new Dictionary<string, string>
                             {
                                  { "basket", "Basket Api" }
@@ -130,6 +131,8 @@ namespace CartApi
                 .UseSwaggerUI(options =>
                 {
                     options.SwaggerEndpoint("/swagger/v1/swagger.json", "BasketAPI V1");
+                    options.OAuthClientId("basketswaggerui");
+                    
                 });
             app.UseEndpoints(endpoints =>
             {

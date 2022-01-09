@@ -101,6 +101,8 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       MvcClient: http://localhost:7500
+      BasketApiClient: http://localhost:7010
+      OrderApiClient: http://localhost:7020
     ports:
       - "7800:80"
     container_name: tokenserviceapi

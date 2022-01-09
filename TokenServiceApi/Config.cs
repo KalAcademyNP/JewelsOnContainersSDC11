@@ -79,13 +79,15 @@ namespace TokenServiceApi
                     ClientName = "Basket Swagger UI",
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true, 
-
-                    RedirectUris = { $"{clientUrls["BasketApi"]}/swagger/o2c.html" },
-                    PostLogoutRedirectUris = { $"{clientUrls["BasketApi"]}/swagger/" },
+                    RequireConsent = false,
+                    RedirectUris = {$"{clientUrls["BasketApi"]}/swagger/oauth2-redirect.html" },
+                    PostLogoutRedirectUris = {$"{clientUrls["BasketApi"]}/signout-callback-oidc"},
 
                      AllowedScopes = new List<string>
                      {
-
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.OfflineAccess,
                         "basket"
                      }
                 },
